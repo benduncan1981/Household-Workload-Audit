@@ -1,0 +1,126 @@
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Task</th>
+      <th>Me</th>
+      <th>Hollie</th>
+      <th>Shared</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- CLEANING -->
+    <tr><td>Cleaning</td><td>Vacuuming</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Cleaning</td><td>Mopping floors</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Cleaning</td><td>Dusting surfaces</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Cleaning</td><td>Cleaning bathroom</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Cleaning</td><td>Cleaning toilet</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Cleaning</td><td>Changing bedding</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Cleaning</td><td>Emptying bins</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Cleaning</td><td>Wiping kitchen surfaces</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Cleaning</td><td>Deep cleaning tasks</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- LAUNDRY -->
+    <tr><td>Laundry</td><td>Sorting laundry</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Laundry</td><td>Running washing machine</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Laundry</td><td>Running dryer</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Laundry</td><td>Hanging clothes</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Laundry</td><td>Folding clothes</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Laundry</td><td>Putting clothes away</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- KITCHEN & DISHES -->
+    <tr><td>Kitchen & Dishes</td><td>Loading dishwasher</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Kitchen & Dishes</td><td>Unloading dishwasher</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Kitchen & Dishes</td><td>Hand-washing pans</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Kitchen & Dishes</td><td>Cleaning hob</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Kitchen & Dishes</td><td>Cleaning oven</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Kitchen & Dishes</td><td>Taking out recycling</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- COOKING & FOOD -->
+    <tr><td>Cooking & Food</td><td>Meal planning</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Cooking & Food</td><td>Cooking meals</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Cooking & Food</td><td>Batch cooking</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Cooking & Food</td><td>Preparing lunches</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Cooking & Food</td><td>Cleaning up after meals</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- SHOPPING -->
+    <tr><td>Shopping</td><td>Writing shopping list</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Shopping</td><td>Doing online shop</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Shopping</td><td>Going to supermarket</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Shopping</td><td>Unpacking groceries</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- HOME MAINTENANCE -->
+    <tr><td>Home Maintenance</td><td>Fixing broken items</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Home Maintenance</td><td>DIY tasks</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Home Maintenance</td><td>Painting</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Home Maintenance</td><td>Assembling furniture</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Home Maintenance</td><td>Replacing bulbs</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Home Maintenance</td><td>Maintaining appliances</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- GARDEN & OUTDOORS -->
+    <tr><td>Garden & Outdoors</td><td>Mowing lawn</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Garden & Outdoors</td><td>Trimming hedges</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Garden & Outdoors</td><td>Weeding</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Garden & Outdoors</td><td>Sweeping patio</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- CAR -->
+    <tr><td>Car</td><td>Booking MOT</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Car</td><td>Booking servicing</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Car</td><td>Checking tyre pressure</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Car</td><td>Checking oil</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Car</td><td>Cleaning car</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Car</td><td>Insurance renewal</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- TECH -->
+    <tr><td>Tech</td><td>Setting up phones</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Tech</td><td>Managing apps</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Tech</td><td>Managing TV/PlayStation</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Tech</td><td>Troubleshooting tech</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Tech</td><td>Managing accounts/passwords</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- PARENTING -->
+    <tr><td>Parenting</td><td>Morning routine</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Parenting</td><td>Bedtime routine</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Parenting</td><td>Helping with homework</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Parenting</td><td>Reading practice</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Parenting</td><td>School emails</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Parenting</td><td>School meetings</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Parenting</td><td>Taking to appointments</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Parenting</td><td>Managing meltdowns</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Parenting</td><td>Playing/engaging</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Parenting</td><td>Extracurricular transport</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Parenting</td><td>SEN/EHCP admin</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- FINANCES -->
+    <tr><td>Finances</td><td>Earning income</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Finances</td><td>Budgeting</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Finances</td><td>Paying bills</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Finances</td><td>Managing benefits</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Finances</td><td>Insurance admin</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Finances</td><td>Managing subscriptions</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Finances</td><td>Paperwork</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- EMOTIONAL & MENTAL LOAD -->
+    <tr><td>Emotional & Mental Load</td><td>Remembering birthdays</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Emotional & Mental Load</td><td>Planning events</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Emotional & Mental Load</td><td>Managing social commitments</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Emotional & Mental Load</td><td>Initiating conflict repair</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Emotional & Mental Load</td><td>Providing emotional support</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- HEALTH & SELF-CARE -->
+    <tr><td>Health & Self-care</td><td>Taking medication</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Health & Self-care</td><td>Refilling prescriptions</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Health & Self-care</td><td>Monitoring health</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Health & Self-care</td><td>Booking health appointments</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Health & Self-care</td><td>Attending appointments</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Health & Self-care</td><td>Self-care routines</td><td>☐</td><td>☐</td><td>☐</td></tr>
+
+    <!-- NEURODIVERGENCE -->
+    <tr><td>Neurodivergence</td><td>Executive function support</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Neurodivergence</td><td>Sensory management</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Neurodivergence</td><td>Meltdown prevention</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Neurodivergence</td><td>Crisis support</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Neurodivergence</td><td>Creating systems</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <tr><td>Neurodivergence</td><td>Maintaining systems</td><td>☐</td><td>☐</td><td>☐</td></tr>
+  </tbody>
+</table>
