@@ -1,126 +1,499 @@
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Task</th>
-      <th>Me</th>
-      <th>Hollie</th>
-      <th>Shared</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- CLEANING -->
-    <tr><td>Cleaning</td><td>Vacuuming</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Cleaning</td><td>Mopping floors</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Cleaning</td><td>Dusting surfaces</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Cleaning</td><td>Cleaning bathroom</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Cleaning</td><td>Cleaning toilet</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Cleaning</td><td>Changing bedding</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Cleaning</td><td>Emptying bins</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Cleaning</td><td>Wiping kitchen surfaces</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Cleaning</td><td>Deep cleaning tasks</td><td>☐</td><td>☐</td><td>☐</td></tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Household Workload Audit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f5f5f7;
+      --card-bg: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --primary: #007aff;
+      --primary-soft: #e5f0ff;
+      --border: #e0e0e5;
+      --danger: #ff3b30;
+      --success: #34c759;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: stretch;
+    }
+    .app {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: env(safe-area-inset-top, 16px) 16px env(safe-area-inset-bottom, 16px);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .header {
+      text-align: center;
+      padding: 4px 0 0;
+    }
+    .header h1 {
+      font-size: 20px;
+      margin: 0;
+      font-weight: 700;
+    }
+    .header p {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .progress-container {
+      margin-top: 8px;
+      width: 100%;
+      background: #e5e5ea;
+      border-radius: 999px;
+      overflow: hidden;
+      height: 8px;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      transition: width 0.25s ease-out;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 18px 16px 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+    .category {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .question {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .description {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .counter {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .btn {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      background: #f9f9fb;
+      transition: background 0.15s ease, transform 0.05s ease, box-shadow 0.1s ease;
+      user-select: none;
+    }
+    .btn:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .btn-secondary {
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-color: var(--primary-soft);
+    }
+    .btn-outline {
+      background: #f9f9fb;
+      color: var(--text);
+    }
+    .footer {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 4px;
+    }
+    .results {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .results h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .result-card {
+      border-radius: 12px;
+      padding: 10px 8px;
+      background: #f5f5f7;
+      text-align: center;
+      font-size: 13px;
+    }
+    .result-label {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .result-value {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .result-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .conclusion {
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .tag-good {
+      background: rgba(52,199,89,0.12);
+      color: var(--success);
+    }
+    .tag-warning {
+      background: rgba(255,149,0,0.12);
+      color: #ff9500;
+    }
+    .tag-bad {
+      background: rgba(255,59,48,0.12);
+      color: var(--danger);
+    }
+    .restart {
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <h1>Household Workload Audit</h1>
+      <p>One task at a time. Ben / Hollie / Shared.</p>
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
 
-    <!-- LAUNDRY -->
-    <tr><td>Laundry</td><td>Sorting laundry</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Laundry</td><td>Running washing machine</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Laundry</td><td>Running dryer</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Laundry</td><td>Hanging clothes</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Laundry</td><td>Folding clothes</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Laundry</td><td>Putting clothes away</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <div class="card" id="questionCard">
+      <div>
+        <div class="category" id="categoryLabel"></div>
+        <div class="question" id="questionText"></div>
+        <div class="description" id="questionDesc"></div>
+        <div class="counter" id="counterText"></div>
+      </div>
+      <div class="buttons">
+        <button class="btn btn-primary" id="btnBen">Ben</button>
+        <button class="btn btn-secondary" id="btnHollie">Hollie</button>
+        <button class="btn btn-outline" id="btnShared">Shared</button>
+      </div>
+    </div>
 
-    <!-- KITCHEN & DISHES -->
-    <tr><td>Kitchen & Dishes</td><td>Loading dishwasher</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Kitchen & Dishes</td><td>Unloading dishwasher</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Kitchen & Dishes</td><td>Hand-washing pans</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Kitchen & Dishes</td><td>Cleaning hob</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Kitchen & Dishes</td><td>Cleaning oven</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Kitchen & Dishes</td><td>Taking out recycling</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <div class="card results" id="resultsCard">
+      <div>
+        <span class="tag" id="tagSummary"></span>
+        <h2>Results summary</h2>
+        <p class="description" id="resultsIntro"></p>
+      </div>
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-label">Ben</div>
+          <div class="result-value" id="scoreBen">0</div>
+          <div class="result-note" id="scoreBenNote"></div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">Hollie</div>
+          <div class="result-value" id="scoreHollie">0</div>
+          <div class="result-note" id="scoreHollieNote"></div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">Shared</div>
+          <div class="result-value" id="scoreShared">0</div>
+          <div class="result-note" id="scoreSharedNote"></div>
+        </div>
+      </div>
+      <div class="conclusion" id="conclusionText"></div>
+      <div class="result-note" id="extraNote"></div>
+      <div class="buttons restart">
+        <button class="btn btn-outline" id="btnRestart">Restart audit</button>
+      </div>
+    </div>
 
-    <!-- COOKING & FOOD -->
-    <tr><td>Cooking & Food</td><td>Meal planning</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Cooking & Food</td><td>Cooking meals</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Cooking & Food</td><td>Batch cooking</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Cooking & Food</td><td>Preparing lunches</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Cooking & Food</td><td>Cleaning up after meals</td><td>☐</td><td>☐</td><td>☐</td></tr>
+    <div class="footer">
+      Tap one answer per screen. At the end you’ll get a score, conclusion, and summary.
+    </div>
+  </div>
 
-    <!-- SHOPPING -->
-    <tr><td>Shopping</td><td>Writing shopping list</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Shopping</td><td>Doing online shop</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Shopping</td><td>Going to supermarket</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Shopping</td><td>Unpacking groceries</td><td>☐</td><td>☐</td><td>☐</td></tr>
+  <script>
+    const tasks = [
+      // Cleaning
+      { category: "Cleaning", task: "Vacuuming", desc: "Who usually vacuums the house?" },
+      { category: "Cleaning", task: "Mopping floors", desc: "Who usually mops hard floors?" },
+      { category: "Cleaning", task: "Dusting surfaces", desc: "Who usually dusts shelves, units, etc.?" },
+      { category: "Cleaning", task: "Cleaning bathroom", desc: "Who usually cleans the sink, bath, shower?" },
+      { category: "Cleaning", task: "Cleaning toilet", desc: "Who usually cleans the toilet?" },
+      { category: "Cleaning", task: "Changing bedding", desc: "Who usually changes and washes bedding?" },
+      { category: "Cleaning", task: "Emptying bins", desc: "Who usually empties bins and takes rubbish out?" },
+      { category: "Cleaning", task: "Wiping kitchen surfaces", desc: "Who usually wipes down kitchen counters?" },
+      { category: "Cleaning", task: "Deep cleaning tasks", desc: "Who usually does deeper cleans (skirting boards, etc.)?" },
 
-    <!-- HOME MAINTENANCE -->
-    <tr><td>Home Maintenance</td><td>Fixing broken items</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Home Maintenance</td><td>DIY tasks</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Home Maintenance</td><td>Painting</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Home Maintenance</td><td>Assembling furniture</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Home Maintenance</td><td>Replacing bulbs</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Home Maintenance</td><td>Maintaining appliances</td><td>☐</td><td>☐</td><td>☐</td></tr>
+      // Laundry
+      { category: "Laundry", task: "Sorting laundry", desc: "Who usually sorts clothes for washing?" },
+      { category: "Laundry", task: "Running washing machine", desc: "Who usually runs the washing machine?" },
+      { category: "Laundry", task: "Running dryer", desc: "Who usually runs the dryer or uses drying racks?" },
+      { category: "Laundry", task: "Hanging clothes", desc: "Who usually hangs clothes to dry?" },
+      { category: "Laundry", task: "Folding clothes", desc: "Who usually folds clean clothes?" },
+      { category: "Laundry", task: "Putting clothes away", desc: "Who usually puts clean clothes away?" },
 
-    <!-- GARDEN & OUTDOORS -->
-    <tr><td>Garden & Outdoors</td><td>Mowing lawn</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Garden & Outdoors</td><td>Trimming hedges</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Garden & Outdoors</td><td>Weeding</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Garden & Outdoors</td><td>Sweeping patio</td><td>☐</td><td>☐</td><td>☐</td></tr>
+      // Kitchen & Dishes
+      { category: "Kitchen & Dishes", task: "Loading dishwasher", desc: "Who usually loads the dishwasher?" },
+      { category: "Kitchen & Dishes", task: "Unloading dishwasher", desc: "Who usually unloads the dishwasher?" },
+      { category: "Kitchen & Dishes", task: "Hand-washing pans", desc: "Who usually hand-washes pans and awkward items?" },
+      { category: "Kitchen & Dishes", task: "Cleaning hob", desc: "Who usually cleans the hob?" },
+      { category: "Kitchen & Dishes", task: "Cleaning oven", desc: "Who usually cleans the oven?" },
+      { category: "Kitchen & Dishes", task: "Taking out recycling", desc: "Who usually takes out recycling?" },
 
-    <!-- CAR -->
-    <tr><td>Car</td><td>Booking MOT</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Car</td><td>Booking servicing</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Car</td><td>Checking tyre pressure</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Car</td><td>Checking oil</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Car</td><td>Cleaning car</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Car</td><td>Insurance renewal</td><td>☐</td><td>☐</td><td>☐</td></tr>
+      // Cooking & Food
+      { category: "Cooking & Food", task: "Meal planning", desc: "Who usually plans what you’ll eat?" },
+      { category: "Cooking & Food", task: "Cooking meals", desc: "Who usually cooks main meals?" },
+      { category: "Cooking & Food", task: "Batch cooking", desc: "Who usually batch cooks or preps ahead?" },
+      { category: "Cooking & Food", task: "Preparing lunches", desc: "Who usually prepares lunches (for you / Oscar)?" },
+      { category: "Cooking & Food", task: "Cleaning up after meals", desc: "Who usually cleans up after meals?" },
 
-    <!-- TECH -->
-    <tr><td>Tech</td><td>Setting up phones</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Tech</td><td>Managing apps</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Tech</td><td>Managing TV/PlayStation</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Tech</td><td>Troubleshooting tech</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Tech</td><td>Managing accounts/passwords</td><td>☐</td><td>☐</td><td>☐</td></tr>
+      // Shopping
+      { category: "Shopping", task: "Writing shopping list", desc: "Who usually writes the shopping list?" },
+      { category: "Shopping", task: "Doing online shop", desc: "Who usually does the online grocery shop?" },
+      { category: "Shopping", task: "Going to supermarket", desc: "Who usually goes to the supermarket?" },
+      { category: "Shopping", task: "Unpacking groceries", desc: "Who usually unpacks the groceries?" },
 
-    <!-- PARENTING -->
-    <tr><td>Parenting</td><td>Morning routine</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Parenting</td><td>Bedtime routine</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Parenting</td><td>Helping with homework</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Parenting</td><td>Reading practice</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Parenting</td><td>School emails</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Parenting</td><td>School meetings</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Parenting</td><td>Taking to appointments</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Parenting</td><td>Managing meltdowns</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Parenting</td><td>Playing/engaging</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Parenting</td><td>Extracurricular transport</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Parenting</td><td>SEN/EHCP admin</td><td>☐</td><td>☐</td><td>☐</td></tr>
+      // Home Maintenance
+      { category: "Home Maintenance", task: "Fixing broken items", desc: "Who usually fixes broken things at home?" },
+      { category: "Home Maintenance", task: "DIY tasks", desc: "Who usually does DIY jobs?" },
+      { category: "Home Maintenance", task: "Painting", desc: "Who usually paints walls/woodwork?" },
+      { category: "Home Maintenance", task: "Assembling furniture", desc: "Who usually assembles flat-pack furniture?" },
+      { category: "Home Maintenance", task: "Replacing bulbs", desc: "Who usually replaces light bulbs?" },
+      { category: "Home Maintenance", task: "Maintaining appliances", desc: "Who usually maintains/cleans appliances?" },
 
-    <!-- FINANCES -->
-    <tr><td>Finances</td><td>Earning income</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Finances</td><td>Budgeting</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Finances</td><td>Paying bills</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Finances</td><td>Managing benefits</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Finances</td><td>Insurance admin</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Finances</td><td>Managing subscriptions</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Finances</td><td>Paperwork</td><td>☐</td><td>☐</td><td>☐</td></tr>
+      // Garden & Outdoors
+      { category: "Garden & Outdoors", task: "Mowing lawn", desc: "Who usually mows the lawn?" },
+      { category: "Garden & Outdoors", task: "Trimming hedges", desc: "Who usually trims hedges?" },
+      { category: "Garden & Outdoors", task: "Weeding", desc: "Who usually weeds the garden?" },
+      { category: "Garden & Outdoors", task: "Sweeping patio", desc: "Who usually sweeps the patio / outdoor areas?" },
 
-    <!-- EMOTIONAL & MENTAL LOAD -->
-    <tr><td>Emotional & Mental Load</td><td>Remembering birthdays</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Emotional & Mental Load</td><td>Planning events</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Emotional & Mental Load</td><td>Managing social commitments</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Emotional & Mental Load</td><td>Initiating conflict repair</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Emotional & Mental Load</td><td>Providing emotional support</td><td>☐</td><td>☐</td><td>☐</td></tr>
+      // Car
+      { category: "Car", task: "Booking MOT", desc: "Who usually books the car MOT?" },
+      { category: "Car", task: "Booking servicing", desc: "Who usually books car servicing?" },
+      { category: "Car", task: "Checking tyre pressure", desc: "Who usually checks tyre pressure?" },
+      { category: "Car", task: "Checking oil", desc: "Who usually checks car oil/fluids?" },
+      { category: "Car", task: "Cleaning car", desc: "Who usually cleans the car?" },
+      { category: "Car", task: "Insurance renewal", desc: "Who usually handles car insurance renewal?" },
 
-    <!-- HEALTH & SELF-CARE -->
-    <tr><td>Health & Self-care</td><td>Taking medication</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Health & Self-care</td><td>Refilling prescriptions</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Health & Self-care</td><td>Monitoring health</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Health & Self-care</td><td>Booking health appointments</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Health & Self-care</td><td>Attending appointments</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Health & Self-care</td><td>Self-care routines</td><td>☐</td><td>☐</td><td>☐</td></tr>
+      // Tech
+      { category: "Tech", task: "Setting up phones", desc: "Who usually sets up phones?" },
+      { category: "Tech", task: "Managing apps", desc: "Who usually manages apps and logins?" },
+      { category: "Tech", task: "Managing TV/PlayStation", desc: "Who usually manages TV/PlayStation setup?" },
+      { category: "Tech", task: "Troubleshooting tech", desc: "Who usually troubleshoots tech issues?" },
+      { category: "Tech", task: "Managing accounts/passwords", desc: "Who usually manages accounts and passwords?" },
 
-    <!-- NEURODIVERGENCE -->
-    <tr><td>Neurodivergence</td><td>Executive function support</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Neurodivergence</td><td>Sensory management</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Neurodivergence</td><td>Meltdown prevention</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Neurodivergence</td><td>Crisis support</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Neurodivergence</td><td>Creating systems</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    <tr><td>Neurodivergence</td><td>Maintaining systems</td><td>☐</td><td>☐</td><td>☐</td></tr>
-  </tbody>
-</table>
+      // Parenting
+      { category: "Parenting", task: "Morning routine", desc: "Who usually handles Oscar’s morning routine?" },
+      { category: "Parenting", task: "Bedtime routine", desc: "Who usually handles Oscar’s bedtime routine?" },
+      { category: "Parenting", task: "Helping with homework", desc: "Who usually helps with homework?" },
+      { category: "Parenting", task: "Reading practice", desc: "Who usually does reading practice with Oscar?" },
+      { category: "Parenting", task: "School emails", desc: "Who usually reads/replies to school emails?" },
+      { category: "Parenting", task: "School meetings", desc: "Who usually attends school meetings?" },
+      { category: "Parenting", task: "Taking to appointments", desc: "Who usually takes Oscar to appointments?" },
+      { category: "Parenting", task: "Managing meltdowns", desc: "Who usually manages Oscar’s meltdowns?" },
+      { category: "Parenting", task: "Playing/engaging", desc: "Who usually plays and actively engages with Oscar?" },
+      { category: "Parenting", task: "Extracurricular transport", desc: "Who usually does transport for activities?" },
+      { category: "Parenting", task: "SEN/EHCP admin", desc: "Who usually handles SEN/EHCP admin?" },
+
+      // Finances
+      { category: "Finances", task: "Earning income", desc: "Who currently earns income?" },
+      { category: "Finances", task: "Budgeting", desc: "Who usually manages the budget?" },
+      { category: "Finances", task: "Paying bills", desc: "Who usually pays the bills?" },
+      { category: "Finances", task: "Managing benefits", desc: "Who usually manages benefits paperwork?" },
+      { category: "Finances", task: "Insurance admin", desc: "Who usually handles insurance admin?" },
+      { category: "Finances", task: "Managing subscriptions", desc: "Who usually manages subscriptions?" },
+      { category: "Finances", task: "Paperwork", desc: "Who usually handles general paperwork?" },
+
+      // Emotional & Mental Load
+      { category: "Emotional & Mental Load", task: "Remembering birthdays", desc: "Who usually remembers birthdays/important dates?" },
+      { category: "Emotional & Mental Load", task: "Planning events", desc: "Who usually plans events/occasions?" },
+      { category: "Emotional & Mental Load", task: "Managing social commitments", desc: "Who usually manages social commitments?" },
+      { category: "Emotional & Mental Load", task: "Initiating conflict repair", desc: "Who usually initiates repair after conflict?" },
+      { category: "Emotional & Mental Load", task: "Providing emotional support", desc: "Who usually provides emotional support to the other?" },
+
+      // Health & Self-care
+      { category: "Health & Self-care", task: "Taking medication", desc: "Who usually remembers to take their own meds?" },
+      { category: "Health & Self-care", task: "Refilling prescriptions", desc: "Who usually arranges prescription refills?" },
+      { category: "Health & Self-care", task: "Monitoring health", desc: "Who usually monitors their own health (BP, symptoms, etc.)?" },
+      { category: "Health & Self-care", task: "Booking health appointments", desc: "Who usually books their own health appointments?" },
+      { category: "Health & Self-care", task: "Attending appointments", desc: "Who usually attends their own appointments?" },
+      { category: "Health & Self-care", task: "Self-care routines", desc: "Who usually maintains their own self-care routines?" },
+
+      // Neurodivergence
+      { category: "Neurodivergence", task: "Executive function support", desc: "Who usually supports the other with executive function (reminders, prompts)?" },
+      { category: "Neurodivergence", task: "Sensory management", desc: "Who usually manages the environment for sensory needs?" },
+      { category: "Neurodivergence", task: "Meltdown prevention", desc: "Who usually takes steps to prevent meltdowns (for either of you)?" },
+      { category: "Neurodivergence", task: "Crisis support", desc: "Who usually supports the other in crisis/shutdown?" },
+      { category: "Neurodivergence", task: "Creating systems", desc: "Who usually creates systems/routines that keep the house running?" },
+      { category: "Neurodivergence", task: "Maintaining systems", desc: "Who usually maintains those systems over time?" }
+    ];
+
+    let index = 0;
+    const answers = [];
+
+    const categoryLabel = document.getElementById("categoryLabel");
+    const questionText = document.getElementById("questionText");
+    const questionDesc = document.getElementById("questionDesc");
+    const counterText = document.getElementById("counterText");
+    const progressBar = document.getElementById("progressBar");
+
+    const questionCard = document.getElementById("questionCard");
+    const resultsCard = document.getElementById("resultsCard");
+
+    const btnBen = document.getElementById("btnBen");
+    const btnHollie = document.getElementById("btnHollie");
+    const btnShared = document.getElementById("btnShared");
+    const btnRestart = document.getElementById("btnRestart");
+
+    const scoreBenEl = document.getElementById("scoreBen");
+    const scoreHollieEl = document.getElementById("scoreHollie");
+    const scoreSharedEl = document.getElementById("scoreShared");
+    const scoreBenNote = document.getElementById("scoreBenNote");
+    const scoreHollieNote = document.getElementById("scoreHollieNote");
+    const scoreSharedNote = document.getElementById("scoreSharedNote");
+    const conclusionText = document.getElementById("conclusionText");
+    const resultsIntro = document.getElementById("resultsIntro");
+    const extraNote = document.getElementById("extraNote");
+    const tagSummary = document.getElementById("tagSummary");
+
+    function renderQuestion() {
+      const total = tasks.length;
+      if (index >= total) {
+        showResults();
+        return;
+      }
+      const t = tasks[index];
+      categoryLabel.textContent = t.category;
+      questionText.textContent = t.task;
+      questionDesc.textContent = t.desc;
+      counterText.textContent = `Question ${index + 1} of ${total}`;
+      const progress = ((index) / total) * 100;
+      progressBar.style.width = progress + "%";
+    }
+
+    function recordAnswer(who) {
+      answers[index] = who;
+      index++;
+      renderQuestion();
+    }
+
+    function showResults() {
+      const total = tasks.length;
+      const benCount = answers.filter(a => a === "Ben").length;
+      const hollieCount = answers.filter(a => a === "Hollie").length;
+      const sharedCount = answers.filter(a => a === "Shared").length;
+
+      const pct = (n) => total === 0 ? 0 : Math.round((n / total) * 100);
+
+      scoreBenEl.textContent = benCount;
+      scoreHollieEl.textContent = hollieCount;
+      scoreSharedEl.textContent = sharedCount;
+
+      scoreBenNote.textContent = pct(benCount) + "% of tasks";
+      scoreHollieNote.textContent = pct(hollieCount) + "% of tasks";
+      scoreSharedNote.textContent = pct(sharedCount) + "% of tasks";
+
+      let tag = "";
+      let tagClass = "";
+      let conclusion = "";
+
+      if (benCount > hollieCount + 5) {
+        tag = "Imbalance towards Ben";
+        tagClass = "tag-bad";
+        conclusion = "The workload is heavily skewed towards Ben. This doesn’t automatically mean anyone is ‘wrong’, but it does mean the current system relies a lot on Ben’s capacity. That has consequences for burnout, resentment, and how sustainable this setup is.";
+      } else if (hollieCount > benCount + 5) {
+        tag = "Imbalance towards Hollie";
+        tagClass = "tag-warning";
+        conclusion = "The workload is heavily skewed towards Hollie. Even if some of this is by necessity (e.g. income, parenting), it still means her load is high and may be contributing to stress, burnout, and health issues.";
+      } else {
+        tag = "Relatively balanced";
+        tagClass = "tag-good";
+        conclusion = "On paper, the workload is relatively balanced. That doesn’t mean it feels fair emotionally, but it does mean the raw distribution of tasks isn’t wildly one-sided.";
+      }
+
+      tagSummary.textContent = tag;
+      tagSummary.className = "tag " + tagClass;
+      resultsIntro.textContent = `You’ve just gone through ${total} tasks, one by one, and marked who usually does what: Ben, Hollie, or Shared. This is the raw picture, without emotion or memory bias.`;
+
+      conclusionText.textContent = conclusion;
+
+      extraNote.textContent =
+        "Next step isn’t blame. It’s: “Given this picture, what actually feels sustainable for both of us?” You can use this as a neutral reference point in future conversations, rather than arguing from memory or emotion.";
+
+      progressBar.style.width = "100%";
+      questionCard.style.display = "none";
+      resultsCard.style.display = "flex";
+    }
+
+    btnBen.addEventListener("click", () => recordAnswer("Ben"));
+    btnHollie.addEventListener("click", () => recordAnswer("Hollie"));
+    btnShared.addEventListener("click", () => recordAnswer("Shared"));
+
+    btnRestart.addEventListener("click", () => {
+      index = 0;
+      answers.length = 0;
+      questionCard.style.display = "flex";
+      resultsCard.style.display = "none";
+      renderQuestion();
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
