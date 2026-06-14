@@ -1,299 +1,509 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Household Assessment App</title>
-    <style>
-        :root {
-            --bg-color: #f2f2f7;
-            --card-bg: #ffffff;
-            --text-main: #1c1c1e;
-            --text-secondary: #8e8e93;
-            --primary-accent: #007aff;
-            --ben-color: #34c759;
-            --hollie-color: #af52de;
-            --shared-color: #ff9500;
-            --border-color: #e5e5ea;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Household Responsibility Assessment</title>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+<style>
+:root{
+    --bg:#f2f2f7;
+    --card:#ffffff;
+    --text:#1c1c1e;
+    --secondary:#6e6e73;
+    --blue:#007aff;
+    --green:#34c759;
+    --orange:#ff9500;
+    --border:#d1d1d6;
+}
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-        }
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
 
-        #app-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            max-width: 500px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 16px;
-            position: relative;
-        }
+body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
 
-        .header {
-            margin-bottom: 16px;
-        }
+.app{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
 
-        .progress-container {
-            background-color: var(--border-color);
-            border-radius: 4px;
-            height: 8px;
-            width: 100%;
-            overflow: hidden;
-        }
+.progress-wrap{
+    padding:16px;
+    background:#fff;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
 
-        .progress-bar {
-            background-color: var(--primary-accent);
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
+.progress-label{
+    font-size:14px;
+    color:var(--secondary);
+    margin-bottom:8px;
+}
 
-        .counter {
-            text-align: right;
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-top: 6px;
-            font-weight: 500;
-        }
+.progress{
+    height:10px;
+    background:#e5e5ea;
+    border-radius:999px;
+    overflow:hidden;
+}
 
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 350px;
-        }
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:var(--blue);
+    transition:width .25s ease;
+}
 
-        .category-tag {
-            align-self: flex-start;
-            background-color: rgba(0, 122, 255, 0.1);
-            color: var(--primary-accent);
-            padding: 4px 10px;
-            border-radius: 100px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 16px;
-        }
+.screen{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
 
-        .task-name {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            line-height: 1.25;
-        }
+.card{
+    width:100%;
+    max-width:700px;
+    background:var(--card);
+    border-radius:24px;
+    padding:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
 
-        .task-desc {
-            font-size: 16px;
-            color: var(--text-secondary);
-            line-height: 1.4;
-            flex: 1;
-        }
+.category{
+    color:var(--blue);
+    font-size:14px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+}
 
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 24px;
-        }
+.task{
+    margin-top:10px;
+    font-size:28px;
+    font-weight:700;
+    line-height:1.2;
+}
 
-        .btn {
-            border: none;
-            border-radius: 12px;
-            padding: 16px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.1s ease, opacity 0.1s ease;
-            text-align: center;
-            width: 100%;
-        }
+.desc{
+    margin-top:12px;
+    color:var(--secondary);
+    font-size:17px;
+    line-height:1.5;
+}
 
-        .btn:active {
-            transform: scale(0.98);
-            opacity: 0.9;
-        }
+.buttons{
+    margin-top:24px;
+    display:grid;
+    gap:12px;
+}
 
-        .btn-ben { background-color: var(--ben-color); color: white; }
-        .btn-hollie { background-color: var(--hollie-color); color: white; }
-        .btn-shared { background-color: var(--shared-color); color: white; }
-        .btn-restart { background-color: var(--text-main); color: white; margin-top: 24px; }
+button{
+    border:none;
+    border-radius:16px;
+    padding:18px;
+    font-size:20px;
+    font-weight:700;
+    cursor:pointer;
+}
 
-        /* Results Screen Styling */
-        .results-container {
-            display: none;
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            flex-direction: column;
-        }
+.btn-ben{
+    background:var(--blue);
+    color:#fff;
+}
 
-        .headline {
-            font-size: 26px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--border-color);
-        }
+.btn-hollie{
+    background:var(--green);
+    color:#fff;
+}
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 24px;
-            text-align: center;
-        }
+.btn-shared{
+    background:var(--orange);
+    color:#fff;
+}
 
-        .stat-box {
-            padding: 12px 4px;
-            border-radius: 8px;
-            color: white;
-        }
+.result-section{
+    margin-top:24px;
+}
 
-        .stat-box.ben { background-color: var(--ben-color); }
-        .stat-box.hollie { background-color: var(--hollie-color); }
-        .stat-box.shared { background-color: var(--shared-color); }
+.result-section h3{
+    margin:0 0 10px;
+}
 
-        .stat-val { font-size: 20px; font-weight: 700; }
-        .stat-pct { font-size: 13px; opacity: 0.9; }
-        .stat-lbl { font-size: 12px; font-weight: 500; margin-top: 2px; text-transform: uppercase; }
+.stat{
+    background:#f7f7fa;
+    padding:14px;
+    border-radius:12px;
+    margin-bottom:10px;
+}
 
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 20px 0 10px 0;
-            color: var(--text-main);
-        }
+.tag{
+    display:inline-block;
+    padding:10px 16px;
+    border-radius:999px;
+    font-weight:700;
+    margin-bottom:20px;
+}
 
-        .text-block {
-            font-size: 15px;
-            line-height: 1.5;
-            color: #3a3a3c;
-            background-color: var(--bg-color);
-            padding: 14px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-        }
+.tag-ben{
+    background:#d6e8ff;
+    color:#0057c2;
+}
 
-        .breakdown-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 14px;
-        }
+.tag-hollie{
+    background:#dff7e6;
+    color:#137333;
+}
 
-        .breakdown-cat { font-weight: 600; max-width: 50%; }
-        .breakdown-alloc { font-size: 13px; color: var(--text-secondary); text-align: right; }
+.tag-balanced{
+    background:#f0f0f0;
+    color:#444;
+}
 
-        .action-list {
-            padding-left: 20px;
-            font-size: 15px;
-            line-height: 1.5;
-        }
+ul{
+    padding-left:20px;
+}
 
-        .action-list li {
-            margin-bottom: 8px;
-            color: #3a3a3c;
-        }
-    </style>
+.restart{
+    width:100%;
+    margin-top:24px;
+    background:var(--blue);
+    color:#fff;
+}
+
+.hidden{
+    display:none;
+}
+</style>
 </head>
 <body>
 
-<div id="app-container">
-    <!-- Active Quiz View -->
-    <div id="quiz-view">
-        <div class="header">
-            <div class="progress-container">
-                <div id="progress-bar" class="progress-bar"></div>
-            </div>
-            <div id="counter" class="counter">0 / 0</div>
-        </div>
+<div class="app">
 
-        <div class="card">
-            <div>
-                <div id="category-tag" class="category-tag">Category</div>
-                <div id="task-name" class="task-name">Task Name</div>
-                <div id="task-desc" class="task-desc">Task description goes here.</div>
-            </div>
-
-            <div class="button-group">
-                <button class="btn btn-ben" onclick="handleAnswer('Ben')">Ben</button>
-                <button class="btn btn-hollie" onclick="handleAnswer('Hollie')">Hollie</button>
-                <button class="btn btn-shared" onclick="handleAnswer('Shared')">Shared</button>
-            </div>
+    <div class="progress-wrap">
+        <div class="progress-label" id="progressLabel">Question 1</div>
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
     </div>
 
-    <!-- Results View -->
-    <div id="results-view" class="results-container">
-        <div id="headline" class="headline">Imbalance Assessment</div>
-        
-        <div class="stats-grid">
-            <div class="stat-box ben">
-                <div id="stat-ben-val" class="stat-val">0</div>
-                <div id="stat-ben-pct" class="stat-pct">0%</div>
-                <div class="stat-lbl">Ben</div>
-            </div>
-            <div class="stat-box hollie">
-                <div id="stat-hollie-val" class="stat-val">0</div>
-                <div id="stat-hollie-pct" class="stat-pct">0%</div>
-                <div class="stat-lbl">Hollie</div>
-            </div>
-            <div class="stat-box shared">
-                <div id="stat-shared-val" class="stat-val">0</div>
-                <div id="stat-shared-pct" class="stat-pct">0%</div>
-                <div class="stat-lbl">Shared</div>
-            </div>
-        </div>
-
-        <div class="section-title">Detailed Conclusion</div>
-        <div id="conclusion-text" class="text-block"></div>
-
-        <div class="section-title">Reality Check</div>
-        <div id="reality-check-text" class="text-block"></div>
-
-        <div class="section-title">Category Breakdown</div>
-        <div id="category-breakdown"></div>
-
-        <div class="section-title">Recommended Actions</div>
-        <ul id="action-list" class="action-list"></ul>
-
-        <button class="btn btn-restart" onclick="restartApp()">Restart Assessment</button>
+    <div class="screen">
+        <div class="card" id="card"></div>
     </div>
+
 </div>
 
 <script>
-    const tasks = [
-        // Cleaning
-        { category: "Cleaning", name: "Deep Kitchen Clean", desc: "Scrubbing countertops, wiping down cabinets, cleaning the oven, microwave inside/out, and degreasing surfaces." },
-        { category: "Cleaning", name: "Bathroom Sanitation", desc: "Scrubbing showers, bathtubs, cleaning toilets, wiping mirrors, and washing sink basins thoroughly." },
-        { category: "Cleaning", name: "Floors Maintenance", desc: "Vacuuming carpets, sweeping hard surfaces, and mopping all hard floors across the entire household." },
-        { category: "Cleaning", name: "Dusting & Wiping", desc: "Clearing dust from furniture, shelves, baseboards, blinds, and interior window sills." },
-        { category: "Cleaning", name: "Trash & Recycling Management", desc: "Emptying inside bins, sorting recyclables, and taking large bins to the street curb on scheduled collection days." },
 
-        // Laundry
+const tasks = [
+
+{category:"Cleaning",task:"Vacuuming floors",description:"Regular vacuuming throughout the home"},
+{category:"Cleaning",task:"Bathroom cleaning",description:"Cleaning toilets, sinks and showers"},
+{category:"Cleaning",task:"Dusting",description:"Removing dust from surfaces"},
+{category:"Cleaning",task:"General tidying",description:"Keeping rooms organised"},
+
+{category:"Laundry",task:"Washing clothes",description:"Loading and running laundry"},
+{category:"Laundry",task:"Drying laundry",description:"Hanging or tumble drying"},
+{category:"Laundry",task:"Folding clothes",description:"Sorting and folding clean laundry"},
+{category:"Laundry",task:"Putting clothes away",description:"Returning items to storage"},
+
+{category:"Kitchen & Dishes",task:"Loading dishwasher",description:"Managing dishwashing cycles"},
+{category:"Kitchen & Dishes",task:"Hand washing dishes",description:"Cleaning items manually"},
+{category:"Kitchen & Dishes",task:"Kitchen cleaning",description:"Wiping surfaces and appliances"},
+
+{category:"Cooking & Food",task:"Meal planning",description:"Deciding what the household eats"},
+{category:"Cooking & Food",task:"Cooking meals",description:"Preparing daily meals"},
+{category:"Cooking & Food",task:"Food inventory",description:"Monitoring supplies and expiry dates"},
+
+{category:"Shopping",task:"Grocery shopping",description:"Buying household food"},
+{category:"Shopping",task:"Household supplies",description:"Buying cleaning and home essentials"},
+{category:"Shopping",task:"Researching purchases",description:"Comparing products and prices"},
+
+{category:"Home Maintenance",task:"DIY repairs",description:"Fixing issues around the home"},
+{category:"Home Maintenance",task:"Arranging tradespeople",description:"Booking professional help"},
+{category:"Home Maintenance",task:"Monitoring household problems",description:"Identifying maintenance needs"},
+
+{category:"Garden & Outdoors",task:"Lawn care",description:"Mowing and maintaining grass"},
+{category:"Garden & Outdoors",task:"Garden upkeep",description:"General outdoor maintenance"},
+
+{category:"Car",task:"Vehicle maintenance",description:"Servicing and repairs"},
+{category:"Car",task:"Fuel and transport planning",description:"Keeping transport running"},
+
+{category:"Tech",task:"Device setup",description:"Managing technology in the home"},
+{category:"Tech",task:"Troubleshooting tech",description:"Fixing technical problems"},
+{category:"Tech",task:"Digital security",description:"Passwords, backups and protection"},
+
+{category:"Parenting",task:"School communication",description:"Reading and responding to school updates"},
+{category:"Parenting",task:"School runs",description:"Transporting children"},
+{category:"Parenting",task:"Homework support",description:"Helping with education"},
+{category:"Parenting",task:"Daily care",description:"Routine parenting responsibilities"},
+
+{category:"Finances",task:"Budgeting",description:"Managing household spending"},
+{category:"Finances",task:"Paying bills",description:"Ensuring bills are paid"},
+{category:"Finances",task:"Financial planning",description:"Long-term money management"},
+
+{category:"Emotional & Mental Load",task:"Remembering important dates",description:"Birthdays, events and deadlines"},
+{category:"Emotional & Mental Load",task:"Monitoring family wellbeing",description:"Keeping track of emotional needs"},
+
+{category:"Health & Self-care",task:"Booking appointments",description:"Medical and health scheduling"},
+{category:"Health & Self-care",task:"Medication management",description:"Tracking treatments and prescriptions"},
+
+{category:"Neurodivergence",task:"ADHD accommodation planning",description:"Managing support needs"},
+{category:"Neurodivergence",task:"Executive function support",description:"Creating systems and reminders"},
+
+{category:"Invisible Mental Load",task:"Remembering household needs",description:"Tracking future requirements"},
+{category:"Invisible Mental Load",task:"Monitoring unfinished tasks",description:"Keeping mental lists"},
+
+{category:"Neurodivergence Cognitive Load",task:"Routine management",description:"Maintaining structure and predictability"},
+{category:"Neurodivergence Cognitive Load",task:"Sensory planning",description:"Managing sensory impacts"},
+
+{category:"Parenting Extras",task:"Organising activities",description:"Clubs, trips and events"},
+{category:"Parenting Extras",task:"Buying children's items",description:"Clothes, equipment and supplies"},
+
+{category:"Life Admin",task:"Forms and paperwork",description:"Completing documents"},
+{category:"Life Admin",task:"Managing appointments",description:"Tracking schedules and commitments"},
+
+{category:"Social & Family Responsibilities",task:"Maintaining family relationships",description:"Keeping in touch with relatives"},
+{category:"Social & Family Responsibilities",task:"Social planning",description:"Organising gatherings and events"},
+
+{category:"Emotional Safety & Relationship Maintenance",task:"Conflict repair",description:"Repairing relationship ruptures"},
+{category:"Emotional Safety & Relationship Maintenance",task:"Relationship check-ins",description:"Maintaining connection and communication"},
+
+{category:"Health Management",task:"Monitoring health issues",description:"Tracking symptoms and conditions"},
+{category:"Health Management",task:"Coordinating healthcare",description:"Managing healthcare interactions"},
+
+{category:"Household Systems",task:"Creating systems",description:"Designing household organisation methods"},
+{category:"Household Systems",task:"Maintaining systems",description:"Keeping routines functioning"},
+
+{category:"Crisis Management",task:"Handling emergencies",description:"Managing unexpected problems"},
+{category:"Crisis Management",task:"Contingency planning",description:"Preparing for disruptions"},
+
+{category:"Future Planning",task:"Long-term planning",description:"Thinking ahead for the household"},
+{category:"Future Planning",task:"Major decision making",description:"Strategic household choices"},
+
+{category:"Emotional Risk Load",task:"Managing difficult conversations",description:"Initiating emotionally risky discussions"},
+{category:"Emotional Risk Load",task:"Carrying relationship uncertainty",description:"Holding emotional responsibility"},
+
+{category:"Identity Load",task:"Maintaining family identity",description:"Preserving traditions and values"},
+{category:"Identity Load",task:"Representing the family externally",description:"Being the visible organiser or coordinator"}
+
+];
+
+let index = 0;
+
+const results = {
+    Ben:0,
+    Hollie:0,
+    Shared:0
+};
+
+const categoryResults = {};
+
+const card = document.getElementById("card");
+const progressBar = document.getElementById("progressBar");
+const progressLabel = document.getElementById("progressLabel");
+
+function updateProgress(){
+    const pct = (index/tasks.length)*100;
+    progressBar.style.width = pct + "%";
+    progressLabel.textContent = index < tasks.length
+        ? `Question ${index+1} of ${tasks.length}`
+        : `Assessment Complete`;
+}
+
+function answer(person){
+
+    const current = tasks[index];
+
+    results[person]++;
+
+    if(!categoryResults[current.category]){
+        categoryResults[current.category] = {
+            Ben:0,
+            Hollie:0,
+            Shared:0
+        };
+    }
+
+    categoryResults[current.category][person]++;
+
+    index++;
+
+    if(index >= tasks.length){
+        showResults();
+    }else{
+        renderQuestion();
+    }
+}
+
+function renderQuestion(){
+
+    updateProgress();
+
+    const q = tasks[index];
+
+    card.innerHTML = `
+        <div class="category">${q.category}</div>
+        <div class="task">${q.task}</div>
+        <div class="desc">${q.description}</div>
+
+        <div class="buttons">
+            <button class="btn-ben" onclick="answer('Ben')">Ben</button>
+            <button class="btn-hollie" onclick="answer('Hollie')">Hollie</button>
+            <button class="btn-shared" onclick="answer('Shared')">Shared</button>
+        </div>
+    `;
+}
+
+function showResults(){
+
+    updateProgress();
+
+    const total = tasks.length;
+
+    const benPct = Math.round(results.Ben/total*100);
+    const holliePct = Math.round(results.Hollie/total*100);
+    const sharedPct = Math.round(results.Shared/total*100);
+
+    let tagClass = "tag-balanced";
+    let headline = "Relatively balanced";
+
+    const diff = Math.abs(results.Ben - results.Hollie);
+
+    if(results.Ben > results.Hollie + 5){
+        headline = "Imbalance towards Ben";
+        tagClass = "tag-ben";
+    }
+    else if(results.Hollie > results.Ben + 5){
+        headline = "Imbalance towards Hollie";
+        tagClass = "tag-hollie";
+    }
+
+    let categoryHTML = "";
+
+    Object.keys(categoryResults).forEach(cat=>{
+        const c = categoryResults[cat];
+        categoryHTML += `
+        <div class="stat">
+            <strong>${cat}</strong><br>
+            Ben: ${c.Ben} | Hollie: ${c.Hollie} | Shared: ${c.Shared}
+        </div>`;
+    });
+
+    let conclusion = "";
+    let realityCheck = "";
+    let actions = [];
+
+    if(headline === "Imbalance towards Ben"){
+        conclusion = "The assessment suggests Ben is carrying a larger proportion of household, cognitive, emotional or practical responsibilities. This does not automatically mean every task is harder, but it indicates responsibility ownership is leaning towards Ben.";
+        realityCheck = "Visible chores are only part of household labour. Invisible planning, emotional labour, neurodivergence support and future thinking often consume substantial energy even when not obvious.";
+        actions = [
+            "Identify the top 10 recurring tasks currently owned by Ben.",
+            "Transfer complete ownership of several tasks.",
+            "Create written household systems.",
+            "Schedule a monthly responsibility review.",
+            "Reduce dependence on reminders from Ben.",
+            "Agree explicit ownership for invisible tasks."
+        ];
+    }
+    else if(headline === "Imbalance towards Hollie"){
+        conclusion = "The assessment suggests Hollie is carrying a larger proportion of household, cognitive, emotional or practical responsibilities. Responsibility ownership appears weighted towards Hollie.";
+        realityCheck = "The person carrying more planning and remembering may appear less busy because much of the work happens mentally rather than physically.";
+        actions = [
+            "Identify tasks that can move to Ben.",
+            "Create clearer responsibility ownership.",
+            "Reduce mental load duplication.",
+            "Share planning and administration duties.",
+            "Review emotional labour distribution.",
+            "Track workload monthly."
+        ];
+    }
+    else{
+        conclusion = "The assessment suggests responsibilities are relatively balanced overall. Some categories may still contain hidden imbalances even if the total score looks even.";
+        realityCheck = "A balanced score does not necessarily mean equal stress. Some tasks carry significantly more emotional, cognitive or executive-function demand than others.";
+        actions = [
+            "Review category-level differences.",
+            "Discuss hidden mental load tasks.",
+            "Keep responsibility ownership clear.",
+            "Review the assessment every few months.",
+            "Protect personal downtime for both people.",
+            "Improve household systems where needed."
+        ];
+    }
+
+    card.innerHTML = `
+        <div class="tag ${tagClass}">${headline}</div>
+
+        <div class="stat"><strong>Total Tasks:</strong> ${total}</div>
+
+        <div class="stat">
+            <strong>Ben</strong><br>
+            ${results.Ben} tasks (${benPct}%)
+        </div>
+
+        <div class="stat">
+            <strong>Hollie</strong><br>
+            ${results.Hollie} tasks (${holliePct}%)
+        </div>
+
+        <div class="stat">
+            <strong>Shared</strong><br>
+            ${results.Shared} tasks (${sharedPct}%)
+        </div>
+
+        <div class="result-section">
+            <h3>Conclusion</h3>
+            <p>${conclusion}</p>
+        </div>
+
+        <div class="result-section">
+            <h3>Category Breakdown</h3>
+            ${categoryHTML}
+        </div>
+
+        <div class="result-section">
+            <h3>Reality Check</h3>
+            <p>${realityCheck}</p>
+        </div>
+
+        <div class="result-section">
+            <h3>Recommended Actions</h3>
+            <ul>
+                ${actions.map(a=>`<li>${a}</li>`).join("")}
+            </ul>
+        </div>
+
+        <button class="restart" onclick="restartAssessment()">Restart Assessment</button>
+    `;
+}
+
+function restartAssessment(){
+    index = 0;
+
+    results.Ben = 0;
+    results.Hollie = 0;
+    results.Shared = 0;
+
+    Object.keys(categoryResults).forEach(k=>delete categoryResults[k]);
+
+    renderQuestion();
+}
+
+renderQuestion();
+
+</script>
+
+</body>
+</html>
