@@ -360,14 +360,14 @@
       { category: "Finances", task: "Managing subscriptions", desc: "Who usually manages subscriptions?" },
       { category: "Finances", task: "Paperwork", desc: "Who usually handles general paperwork?" },
 
-      // Emotional & Mental Load
+      // Emotional & Mental Load (original)
       { category: "Emotional & Mental Load", task: "Remembering birthdays", desc: "Who usually remembers birthdays/important dates?" },
       { category: "Emotional & Mental Load", task: "Planning events", desc: "Who usually plans events/occasions?" },
       { category: "Emotional & Mental Load", task: "Managing social commitments", desc: "Who usually manages social commitments?" },
       { category: "Emotional & Mental Load", task: "Initiating conflict repair", desc: "Who usually initiates repair after conflict?" },
       { category: "Emotional & Mental Load", task: "Providing emotional support", desc: "Who usually provides emotional support to the other?" },
 
-      // Health & Self-care
+      // Health & Self-care (original)
       { category: "Health & Self-care", task: "Taking medication", desc: "Who usually remembers to take their own meds?" },
       { category: "Health & Self-care", task: "Refilling prescriptions", desc: "Who usually arranges prescription refills?" },
       { category: "Health & Self-care", task: "Monitoring health", desc: "Who usually monitors their own health (BP, symptoms, etc.)?" },
@@ -375,13 +375,87 @@
       { category: "Health & Self-care", task: "Attending appointments", desc: "Who usually attends their own appointments?" },
       { category: "Health & Self-care", task: "Self-care routines", desc: "Who usually maintains their own self-care routines?" },
 
-      // Neurodivergence
+      // Neurodivergence (original)
       { category: "Neurodivergence", task: "Executive function support", desc: "Who usually supports the other with executive function (reminders, prompts)?" },
       { category: "Neurodivergence", task: "Sensory management", desc: "Who usually manages the environment for sensory needs?" },
       { category: "Neurodivergence", task: "Meltdown prevention", desc: "Who usually takes steps to prevent meltdowns (for either of you)?" },
       { category: "Neurodivergence", task: "Crisis support", desc: "Who usually supports the other in crisis/shutdown?" },
       { category: "Neurodivergence", task: "Creating systems", desc: "Who usually creates systems/routines that keep the house running?" },
-      { category: "Neurodivergence", task: "Maintaining systems", desc: "Who usually maintains those systems over time?" }
+      { category: "Neurodivergence", task: "Maintaining systems", desc: "Who usually maintains those systems over time?" },
+
+      // Invisible Mental Load
+      { category: "Invisible Mental Load", task: "Remembering household cycles", desc: "Who usually remembers recurring household cycles (bins, sheets, deep cleans)?" },
+      { category: "Invisible Mental Load", task: "Tracking household supplies", desc: "Who usually notices when household supplies are running low?" },
+      { category: "Invisible Mental Load", task: "Anticipating needs", desc: "Who usually anticipates upcoming needs (school events, weather, holidays)?" },
+      { category: "Invisible Mental Load", task: "Managing emotional climate", desc: "Who usually monitors and manages the emotional climate at home?" },
+      { category: "Invisible Mental Load", task: "Default parent role", desc: "Who is usually the 'default parent' Oscar goes to first?" },
+
+      // Neurodivergence Cognitive Load (extra)
+      { category: "Neurodivergence Cognitive Load", task: "Masking in public", desc: "Who usually does more emotional masking in public or social situations?" },
+      { category: "Neurodivergence Cognitive Load", task: "Recovery after overwhelm", desc: "Who usually needs more recovery time after overwhelm?" },
+      { category: "Neurodivergence Cognitive Load", task: "Managing sensory triggers", desc: "Who usually manages or adjusts for sensory triggers (noise, light, textures)?" },
+      { category: "Neurodivergence Cognitive Load", task: "Being the regulator", desc: "Who usually helps the other co-regulate emotionally?" },
+
+      // Parenting Extras (ND-specific)
+      { category: "Parenting Extras", task: "Creating structure and routines", desc: "Who usually creates structure and routines for Oscar?" },
+      { category: "Parenting Extras", task: "Managing sensory needs", desc: "Who usually manages Oscar’s sensory needs?" },
+      { category: "Parenting Extras", task: "Behavioural planning", desc: "Who usually plans strategies for behaviour and transitions?" },
+      { category: "Parenting Extras", task: "School advocacy", desc: "Who usually advocates for Oscar at school?" },
+      { category: "Parenting Extras", task: "Monitoring emotional state", desc: "Who usually monitors Oscar’s emotional state and adjusts around it?" },
+
+      // Life Admin
+      { category: "Life Admin", task: "Passport renewals", desc: "Who usually handles passport renewals?" },
+      { category: "Life Admin", task: "Driving licence renewals", desc: "Who usually handles driving licence renewals?" },
+      { category: "Life Admin", task: "Managing warranties and returns", desc: "Who usually manages warranties, returns, and product issues?" },
+      { category: "Life Admin", task: "Booking travel", desc: "Who usually books travel (trains, hotels, holidays)?" },
+      { category: "Life Admin", task: "Managing household accounts", desc: "Who usually manages household accounts (online portals, logins, providers)?" },
+
+      // Social & Family Responsibilities
+      { category: "Social & Family", task: "Managing extended family relationships", desc: "Who usually manages relationships with extended family?" },
+      { category: "Social & Family", task: "Buying gifts", desc: "Who usually buys gifts for birthdays, Christmas, etc.?" },
+      { category: "Social & Family", task: "Sending cards and messages", desc: "Who usually sends cards or messages for events?" },
+      { category: "Social & Family", task: "Organising family visits", desc: "Who usually organises family visits and meetups?" },
+
+      // Emotional Safety & Relationship Maintenance
+      { category: "Emotional Safety & Relationship", task: "Initiating difficult conversations", desc: "Who usually initiates difficult conversations about the relationship or problems?" },
+      { category: "Emotional Safety & Relationship", task: "Repairing after conflict", desc: "Who usually takes the first step to repair after conflict?" },
+      { category: "Emotional Safety & Relationship", task: "Monitoring partner wellbeing", desc: "Who usually keeps an eye on the other’s wellbeing?" },
+      { category: "Emotional Safety & Relationship", task: "Being the emotional anchor", desc: "Who usually acts as the emotional anchor when things are rough?" },
+
+      // Health Management (hidden work)
+      { category: "Health Management", task: "Researching symptoms", desc: "Who usually researches symptoms or conditions online?" },
+      { category: "Health Management", task: "Managing medication side effects", desc: "Who usually manages or tracks medication side effects?" },
+      { category: "Health Management", task: "Tracking health patterns", desc: "Who usually tracks patterns in health (flare-ups, triggers, etc.)?" },
+      { category: "Health Management", task: "Chasing referrals", desc: "Who usually chases referrals or waits on hold for health admin?" },
+      { category: "Health Management", task: "Coordinating multiple appointments", desc: "Who usually coordinates multiple appointments and schedules?" },
+
+      // Household Systems & Upkeep
+      { category: "Household Systems", task: "Maintaining routines", desc: "Who usually keeps household routines going day to day?" },
+      { category: "Household Systems", task: "Updating systems", desc: "Who usually updates systems when life changes (new schedule, new school, etc.)?" },
+      { category: "Household Systems", task: "Teaching systems", desc: "Who usually teaches the other person how systems work?" },
+      { category: "Household Systems", task: "Being the household memory", desc: "Who usually acts as the 'household memory' for where things are and how things work?" },
+
+      // Crisis Management
+      { category: "Crisis Management", task: "Handling emergencies", desc: "Who usually handles emergencies when they happen?" },
+      { category: "Crisis Management", task: "Managing shutdowns", desc: "Who usually manages or supports during shutdowns?" },
+      { category: "Crisis Management", task: "Managing meltdowns (general)", desc: "Who usually manages meltdowns (for either of you)?" },
+      { category: "Crisis Management", task: "Being the stabiliser", desc: "Who usually acts as the stabiliser when everything feels chaotic?" },
+
+      // Future Planning & Life Direction
+      { category: "Future Planning", task: "Long-term planning", desc: "Who usually thinks about and plans long-term life direction?" },
+      { category: "Future Planning", task: "Financial forecasting", desc: "Who usually thinks ahead about finances and future costs?" },
+      { category: "Future Planning", task: "Career planning", desc: "Who usually thinks about and plans career direction?" },
+      { category: "Future Planning", task: "Household goals", desc: "Who usually sets or suggests goals for the household?" },
+
+      // Emotional Risk Load (optional but included)
+      { category: "Emotional Risk Load", task: "Worrying about finances", desc: "Who usually worries more about finances?" },
+      { category: "Emotional Risk Load", task: "Worrying about the relationship", desc: "Who usually worries more about the relationship itself?" },
+      { category: "Emotional Risk Load", task: "Worrying about Oscar’s future", desc: "Who usually worries more about Oscar’s future?" },
+
+      // Identity Load
+      { category: "Identity Load", task: "Losing personal time", desc: "Who has usually lost more personal time to keep things going?" },
+      { category: "Identity Load", task: "Losing hobbies", desc: "Who has usually lost more hobbies because of responsibilities?" },
+      { category: "Identity Load", task: "Losing social life", desc: "Who has usually lost more of their social life due to the current setup?" }
     ];
 
     let index = 0;
@@ -423,7 +497,7 @@
       questionText.textContent = t.task;
       questionDesc.textContent = t.desc;
       counterText.textContent = `Question ${index + 1} of ${total}`;
-      const progress = ((index) / total) * 100;
+      const progress = (index / total) * 100;
       progressBar.style.width = progress + "%";
     }
 
@@ -453,14 +527,14 @@
       let tagClass = "";
       let conclusion = "";
 
-      if (benCount > hollieCount + 5) {
+      if (benCount > hollieCount + 10) {
         tag = "Imbalance towards Ben";
         tagClass = "tag-bad";
-        conclusion = "The workload is heavily skewed towards Ben. This doesn’t automatically mean anyone is ‘wrong’, but it does mean the current system relies a lot on Ben’s capacity. That has consequences for burnout, resentment, and how sustainable this setup is.";
-      } else if (hollieCount > benCount + 5) {
+        conclusion = "The workload is heavily skewed towards Ben. That doesn’t automatically mean anyone is ‘wrong’, but it does mean the current system relies a lot on Ben’s capacity. That has consequences for burnout, resentment, and how sustainable this setup is.";
+      } else if (hollieCount > benCount + 10) {
         tag = "Imbalance towards Hollie";
         tagClass = "tag-warning";
-        conclusion = "The workload is heavily skewed towards Hollie. Even if some of this is by necessity (e.g. income, parenting), it still means her load is high and may be contributing to stress, burnout, and health issues.";
+        conclusion = "The workload is heavily skewed towards Hollie. Even if some of this is by necessity (e.g. income, parenting, health), it still means her load is high and may be contributing to stress, burnout, and health issues.";
       } else {
         tag = "Relatively balanced";
         tagClass = "tag-good";
